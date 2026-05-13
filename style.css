@@ -255,6 +255,21 @@ body {
   border-color: #1D9E75;
 }
 
+.btn-export {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 2px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+  transition: all .2s;
+}
+.btn-export:hover { background: var(--primary); color: #fff; }
+
 @media (max-width: 480px) {
   .feature-grid, .day-detail { grid-template-columns: 1fr; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }

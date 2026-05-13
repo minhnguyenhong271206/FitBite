@@ -60,14 +60,14 @@ let activeDay = 0;
 // =====================================================
 const $ = id => document.getElementById(id);
 
-const dropzone    = $("dropzone");
-const fileInput   = $("fileInput");
-const dropContent = $("dropContent");
+const dropzone       = $("dropzone");
+const fileInput      = $("fileInput");
+const dropContent    = $("dropContent");
 const previewContent = $("previewContent");
-const previewImg  = $("previewImg");
-const btnAnalyze  = $("btnAnalyze");
-const btnReset    = $("btnReset");
-const errorBox    = $("errorBox");
+const previewImg     = $("previewImg");
+const btnAnalyze     = $("btnAnalyze");
+const btnReset       = $("btnReset");
+const errorBox       = $("errorBox");
 
 const stepUpload    = $("stepUpload");
 const stepAnalyzing = $("stepAnalyzing");
@@ -87,6 +87,7 @@ dropzone.addEventListener("drop", e => {
 fileInput.addEventListener("change", e => setFile(e.target.files[0]));
 btnAnalyze.addEventListener("click", analyze);
 btnReset.addEventListener("click", reset);
+$("btnExport").addEventListener("click", exportPDF);
 
 // =====================================================
 //  HELPERS
@@ -144,7 +145,7 @@ function reset() {
 // =====================================================
 function statusColor(s = "") {
   const l = s.toLowerCase();
-  if (l.includes("bình thường")) return "#1D9E75";
+  if (l.includes("bình thường")) return "#2D6E65";
   if (l.includes("thừa")) return "#D85A30";
   if (l.includes("thiếu")) return "#378ADD";
   return "#888";
@@ -156,20 +157,38 @@ function goalIcon(g = "") {
 }
 
 // =====================================================
+//  EXPORT PDF
+// =====================================================
+function exportPDF() {
+  const el = $("stepResult");
+  const btn = $("btnExport");
+  btn.textContent = "⏳ Đang xuất...";
+  btn.disabled = true;
+  html2pdf().set({
+    margin: 10,
+    filename: "FitBite-thucdon.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+  }).from(el).save().then(() => {
+    btn.textContent = "📄 Xuất PDF thực đơn";
+    btn.disabled = false;
+  });
+}
+
+// =====================================================
 //  RENDER RESULT
 // =====================================================
 function renderResult(data) {
   const a = data.analysis || {};
   const m = data.metrics || {};
 
-  // Status banner
   $("goalIcon").textContent = goalIcon(a.goal || "");
   $("statusText").textContent = a.status || "N/A";
   $("statusText").style.color = statusColor(a.status || "");
   $("summaryText").textContent = a.summary || "";
   $("goalText").textContent = a.goal || "—";
 
-  // Metrics
   const grid = $("metricsGrid");
   grid.innerHTML = "";
   Object.entries(m).forEach(([k, v]) => {
@@ -182,13 +201,12 @@ function renderResult(data) {
     grid.appendChild(card);
   });
 
-  // Macros bar
   if (data.macros) {
     $("dailyKcal").textContent = (data.daily_calories || 0) + " kcal";
     const { protein_g: p, carb_g: c, fat_g: f } = data.macros;
     const total = (p * 4) + (c * 4) + (f * 9) || 1;
     const segments = [
-      { label: "Protein", g: p, kcal: p * 4, color: "#1D9E75" },
+      { label: "Protein", g: p, kcal: p * 4, color: "#2D6E65" },
       { label: "Carb",    g: c, kcal: c * 4, color: "#378ADD" },
       { label: "Fat",     g: f, kcal: f * 9, color: "#D85A30" }
     ];
@@ -201,7 +219,6 @@ function renderResult(data) {
       seg.className = "macro-seg";
       seg.style.cssText = `width:${Math.round(s.kcal / total * 100)}%; background:${s.color};`;
       bar.appendChild(seg);
-
       const li = document.createElement("div");
       li.className = "legend-item";
       li.innerHTML = `<div class="legend-dot" style="background:${s.color}"></div>${s.label}: <b>${s.g}g</b>`;
@@ -209,7 +226,6 @@ function renderResult(data) {
     });
   }
 
-  // Menu tabs
   if (data.menu && data.menu.length) {
     const tabs = $("dayTabs");
     tabs.innerHTML = "";
