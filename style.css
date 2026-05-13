@@ -1,0 +1,262 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f6f8;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.hidden { display: none !important; }
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.logo {
+  width: 42px; height: 42px;
+  background: #1D9E75;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.header-title { font-size: 18px; font-weight: 600; }
+.header-sub { font-size: 12px; color: #666; margin-top: 2px; }
+.btn-reset {
+  margin-left: auto;
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  color: #555;
+  white-space: nowrap;
+}
+.btn-reset:hover { background: #f0f0f0; }
+
+/* ERROR */
+.error-box {
+  background: #FAECE7;
+  border: 1px solid #D85A30;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: #993C1D;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+/* DROPZONE */
+.dropzone {
+  border: 2px dashed #ccc;
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color .2s, background .2s;
+}
+.dropzone:hover { border-color: #1D9E75; background: #f0faf6; }
+.dropzone.active { border-color: #1D9E75; background: #E1F5EE; }
+.dropzone input[type="file"] { display: none; }
+.drop-icon { font-size: 48px; margin-bottom: 10px; }
+.drop-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.drop-sub { font-size: 13px; color: #888; }
+#previewImg { max-height: 240px; max-width: 100%; border-radius: 10px; margin-bottom: 12px; }
+.preview-label { font-size: 13px; color: #0F6E56; font-weight: 500; }
+
+.btn-primary {
+  margin-top: 14px;
+  width: 100%;
+  padding: 13px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  background: #1D9E75;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s;
+}
+.btn-primary:hover { background: #168a63; }
+
+/* FEATURE GRID */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.feature-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid #eee;
+}
+.f-icon { font-size: 22px; margin-bottom: 6px; }
+.f-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.f-desc { font-size: 12px; color: #888; line-height: 1.5; }
+
+/* ANALYZING */
+.analyzing-box {
+  text-align: center;
+  padding: 5rem 2rem;
+}
+.spinner {
+  font-size: 52px;
+  display: inline-block;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+.analyzing-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+.analyzing-sub { font-size: 13px; color: #888; }
+
+/* STATUS BANNER */
+.status-banner {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  border: 1px solid #eee;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.goal-icon { font-size: 30px; flex-shrink: 0; }
+.status-info { flex: 1; }
+.status-text { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.summary-text { font-size: 13px; color: #666; line-height: 1.5; }
+.goal-box { text-align: right; }
+.goal-label { font-size: 11px; color: #888; }
+.goal-value { font-size: 13px; font-weight: 600; color: #1D9E75; }
+
+/* METRICS GRID */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.metric-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eee;
+}
+.metric-label { font-size: 11px; color: #888; margin-bottom: 5px; }
+.metric-value { font-size: 22px; font-weight: 600; }
+.metric-unit { font-size: 11px; color: #aaa; margin-left: 2px; }
+
+/* MACROS */
+.macros-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid #eee;
+  margin-bottom: 16px;
+}
+.macros-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.kcal-value { color: #1D9E75; }
+.macro-bar {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 14px;
+  margin-bottom: 10px;
+}
+.macro-seg { transition: width .4s ease; }
+.macro-legend { display: flex; gap: 16px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* MENU */
+.menu-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.day-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.day-tab {
+  font-size: 12px;
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all .15s;
+}
+.day-tab:hover { border-color: #1D9E75; color: #1D9E75; }
+.day-tab.active { border-color: #1D9E75; background: #E1F5EE; color: #0F6E56; }
+.day-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.meal-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  border: 1px solid #eee;
+}
+.meal-label { font-size: 12px; color: #888; margin-bottom: 5px; }
+.meal-value { font-size: 13px; line-height: 1.5; }
+
+/* CUSTOM BOX */
+.custom-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #eee;
+  margin-top: 14px;
+}
+.custom-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+.custom-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+.custom-row label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+.custom-row select,
+.custom-row input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+  background: #f9f9f9;
+  outline: none;
+}
+.custom-row select:focus,
+.custom-row input:focus {
+  border-color: #1D9E75;
+}
+
+@media (max-width: 480px) {
+  .feature-grid, .day-detail { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .status-banner { flex-wrap: wrap; }
+}

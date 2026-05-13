@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBite - InBody Scanner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">🥗</div>
+      <div>
+        <div class="header-title">FitBite InBody Scanner</div>
+        <div class="header-sub">Quét phiếu InBody → Phân tích → Gợi ý thực đơn</div>
+      </div>
+      <button id="btnReset" class="btn-reset hidden">↩ Bắt đầu lại</button>
+    </div>
+
+    <!-- ERROR -->
+    <div id="errorBox" class="error-box hidden"></div>
+
+    <!-- STEP 1: UPLOAD -->
+    <div id="stepUpload">
+      <div id="dropzone" class="dropzone">
+        <div id="dropContent">
+          <div class="drop-icon">📄</div>
+          <div class="drop-title">Tải ảnh kết quả InBody</div>
+          <div class="drop-sub">Kéo thả hoặc click để chọn ảnh (JPG, PNG)</div>
+        </div>
+        <div id="previewContent" class="hidden">
+          <img id="previewImg" src="" alt="preview" />
+          <div class="preview-label">✅ Ảnh đã tải lên — nhấn Phân tích để tiếp tục</div>
+        </div>
+        <input id="fileInput" type="file" accept="image/*" />
+      </div>
+
+      <!-- Tùy chỉnh -->
+      <div id="customBox" class="custom-box hidden">
+        <div class="custom-title">⚙️ Tùy chỉnh thực đơn</div>
+        <div class="custom-row">
+          <label>🥗 Chế độ ăn</label>
+          <select id="selDiet">
+            <option value="Bình thường">Bình thường</option>
+            <option value="Ăn chay">Ăn chay</option>
+            <option value="Keto">Keto</option>
+            <option value="Ít tinh bột">Ít tinh bột</option>
+          </select>
+        </div>
+        <div class="custom-row">
+          <label>🚫 Dị ứng / Không thích</label>
+          <input id="inputAllergy" type="text" placeholder="VD: tôm, đậu phộng, nấm..." />
+        </div>
+      </div>
+
+      <button id="btnAnalyze" class="btn-primary hidden">🔍 Phân tích InBody</button>
+
+      <div class="feature-grid">
+        <div class="feature-card"><div class="f-icon">📊</div><div class="f-title">Đọc chỉ số tự động</div><div class="f-desc">AI trích xuất các chỉ số từ ảnh InBody</div></div>
+        <div class="feature-card"><div class="f-icon">🥗</div><div class="f-title">Thực đơn 7 ngày</div><div class="f-desc">Gợi ý bữa ăn phù hợp với chỉ số cơ thể</div></div>
+        <div class="feature-card"><div class="f-icon">⚖️</div><div class="f-title">Phân tích tình trạng</div><div class="f-desc">Đánh giá mỡ, cơ, nước, mỡ nội tạng</div></div>
+        <div class="feature-card"><div class="f-icon">🎯</div><div class="f-title">Mục tiêu cá nhân</div><div class="f-desc">Kế hoạch giảm mỡ, tăng cơ, hoặc duy trì</div></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: ANALYZING -->
+    <div id="stepAnalyzing" class="hidden">
+      <div class="analyzing-box">
+        <div class="spinner">⚙️</div>
+        <div class="analyzing-title">Đang phân tích InBody...</div>
+        <div class="analyzing-sub">AI đang đọc các chỉ số và tạo thực đơn cá nhân hóa</div>
+      </div>
+    </div>
+
+    <!-- STEP 3: RESULT -->
+    <div id="stepResult" class="hidden">
+
+      <!-- Status banner -->
+      <div id="statusBanner" class="status-banner">
+        <div id="goalIcon" class="goal-icon"></div>
+        <div class="status-info">
+          <div id="statusText" class="status-text"></div>
+          <div id="summaryText" class="summary-text"></div>
+        </div>
+        <div class="goal-box">
+          <div class="goal-label">Mục tiêu</div>
+          <div id="goalText" class="goal-value"></div>
+        </div>
+      </div>
+
+      <!-- Metrics grid -->
+      <div id="metricsGrid" class="metrics-grid"></div>
+
+      <!-- Macros bar -->
+      <div class="macros-card">
+        <div class="macros-header">
+          <span>Mục tiêu dinh dưỡng mỗi ngày</span>
+          <span id="dailyKcal" class="kcal-value"></span>
+        </div>
+        <div id="macroBar" class="macro-bar"></div>
+        <div id="macroLegend" class="macro-legend"></div>
+      </div>
+
+      <!-- Menu -->
+      <div class="menu-section">
+        <div class="menu-title">🗓️ Thực đơn 7 ngày</div>
+        <div id="dayTabs" class="day-tabs"></div>
+        <div id="dayDetail" class="day-detail"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
